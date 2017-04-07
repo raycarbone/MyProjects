@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
-#import contact_create
-import sys
-import pickle
-
+import sys, pickle
+import lib.engine
 
 def main():
 
@@ -14,20 +12,16 @@ def main():
 
 
     if action == 'S' or action == 's':
-      print(); print("Let's play...")
-      new_player = input('Please enter your Name: ')
+        print(); print("Let's play...")
+        new_player = input('Please enter your Name: ')
 
-      # sart a new game
-      #create_contact(new_name, new_email, new_phone, new_category)
-      A = list("This Word")
-      B = list("---------")
+        # sart a new game
+        #create_contact(new_name, new_email, new_phone, new_category)
+        A = list("This Word")
+        B = list("---------")
+        guess = input('Enter a letter: ')
+        lib.engine.check_letter(guess, A, B)
 
-    guess = input('Enter a letter: ')
-    k = 0
-    for i in A:
-        if i == guess:
-            B[k] = i
-        k=k+1
     print(B)
 
 
