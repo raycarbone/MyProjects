@@ -15,4 +15,4 @@ def check_letter(guess, A, B, guesses):
     if not guessed:
         guesses = guesses - 1
         print(guesses)
-    return B, guesses
+    return(B, guesses)
