@@ -1,0 +1,12 @@
+import scarbble
+
+for word in scrable.wordlist:
+	if has_all_vowels(word):
+		print(word)
+
+
+vowels = "aeiou"
+def has_all_vowels(word):
+	if vowel not in word:
+		return False
+	return True
