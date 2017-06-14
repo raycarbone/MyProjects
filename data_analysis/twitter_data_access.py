@@ -1,4 +1,5 @@
-from tweepy import OAuthHandler, Stream
+from tweepy import OAuthHandler, Stream, API
+import json
 from tweepy.streaming import StreamListener
 
 consumer_key = 'vttGSL2Lou3d1LMqnPu2c114r'
@@ -13,11 +14,12 @@ auth.set_access_token(access_token, access_token_secret)
 
 class PrintListener(StreamListener):
 	def on_status(self, status):
-		print(status.text)
-		prnt(status.author.screen_name,
-			status.created_at,
-			status.source,
-			'\n')
+		if not status.text[:3] == 'RT ':
+			print(status.text)
+			print(status.author.screen_name,
+				status.created_at,
+				status.source,
+				'\n')
 
 	def on_error(self, status_code):
 		print("Error Code: {}".format(status_code))
@@ -31,11 +33,19 @@ class PrintListener(StreamListener):
 def print_to_terminal():
 	listener = PrintListener()
 	stream = Stream(auth, listener)
-	stream.sample()
+	languages = ('en',)
+	stream.sample(languages=languages)
 
-if __name__=='__main__':
-	print_to_terminal
+def pull_down_tweets(screen_name):
+	api = API(auth)
+	tweets = api.user_timeline(screen_name=screen_name, count=200)
+	for tweet in tweets:
+		print(json.dumps(tweet._json, indent=4))
+	
 
+if __name__ == '__main__':
+#	print_to_terminal()
+	pull_down_tweets(auth.username)
 
 
 
